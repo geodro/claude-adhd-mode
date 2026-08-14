@@ -33,6 +33,12 @@ The installer is non-destructive:
 
 Because everything is symlinked, `git pull` updates your setup with no reinstall.
 
+Running more than one Claude config directory? Point the installer at each one:
+
+```sh
+CLAUDE_CONFIG_DIR=~/.claude-work ./install.sh
+```
+
 Restart Claude Code, or start a new session, and it's live in every project.
 
 ## What's in here
