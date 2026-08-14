@@ -130,7 +130,29 @@ Treat these as your errors, not theirs:
 | "too much" | Compress to 2 lines **immediately** — no apology, no "you're right, let me...". |
 | They revisit something already decided | Don't say "we settled this". Give the short answer again and move on. |
 
-## 7. Never do this
+## 7. Writing code they'll have to re-read
+
+The baseline rules are in `CLAUDE.md`. The two that get misapplied:
+
+**Comment the "why", not the "what".** Self-explanatory code needs no narration — but the reason behind a non-obvious choice cannot be recovered by reading it, and it's the first thing that goes after a break.
+
+```python
+# ❌ says what the line already says
+# increment the retry counter
+retries += 1
+
+# ✅ says what the code cannot
+# Third-party API 502s in bursts; anything under 3 retries flaps in production.
+retries += 1
+```
+
+**DRY has a stopping point.** Deduplicate what changes together. Do not deduplicate what merely looks alike — that trades a little duplication for indirection, and indirection means jumping between files, which is exactly where attention breaks.
+
+Rule of thumb: if following one feature means opening a fourth file, the abstraction has cost more than the duplication would have.
+
+**When you notice unrelated mess:** don't fix it. Add a line to NOW.md under "Blocked / to decide" or a `TODO` and keep going. Refactoring while doing something else is how a 5-minute fix becomes a lost afternoon — and the original task ends up unfinished, which is the worst outcome of all.
+
+## 8. Never do this
 
 - Don't enumerate trade-offs nobody asked for.
 - Don't explain what you did before saying **whether** it worked.

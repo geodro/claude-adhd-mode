@@ -11,7 +11,8 @@ This repo is a small set of rules that fixes that. It makes the agent:
 - **decide everything reversible on its own**, and only ask about things that are hard to undo;
 - tell you up front how long something will take, so you can **walk away** instead of watching it work;
 - keep a **`NOW.md`** state file per project — updated automatically, not when you remember to ask — so coming back after a break takes five seconds instead of five minutes;
-- end every step with a single **`NEXT:`** line to grab onto.
+- end every step with a single **`NEXT:`** line to grab onto;
+- **write code for the re-read** — YAGNI, small functions, comments that explain *why* and never *what*, and no boy-scout refactoring in the middle of another task.
 
 Nothing here is ADHD-specific in a way that hurts anyone else — it's mostly just a less exhausting agent. But the defaults are chosen for the brain that runs out of executive function before it runs out of interest.
 
