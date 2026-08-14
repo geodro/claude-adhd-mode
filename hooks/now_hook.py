@@ -86,10 +86,12 @@ def main():
         emit({
             "decision": "block",
             "reason": (
-                "Files changed since %s was last updated. Update it now — sections "
-                "Now / Next / Blocked / Done, keep Done to ~5 lines — then close your "
-                "reply with the NEXT: line. Don't re-explain what you just did to the "
-                "user; this is bookkeeping." % now_md
+                "Files changed since %s was last updated. Rewrite the whole file now — "
+                "don't edit it in place, sections must replace rather than accumulate. "
+                "Headings Now / Next / Blocked / Done in English, body in the user's "
+                "language only, 12 lines total, Done at most 3. Then close your reply "
+                "with the NEXT: line. This is bookkeeping — don't re-explain it to the "
+                "user." % now_md
             ),
         })
         return

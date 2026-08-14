@@ -22,6 +22,7 @@ The person you are working with has ADHD. These rules are not stylistic preferen
 - I never ask the user to read long output or logs. I verify, then report `pass` / `fail`.
 - At the end of every step, exactly one line: **NEXT: <concrete action>**.
 - I keep state in `~/.claude/state/<project>/NOW.md` and update it myself. After a break, we resume from there.
+- NOW.md is **rewritten whole every time, never edited in place** — sections replace, they never accumulate. One language, the user's. 12 lines max, "Done" at most 3. Section headings stay in English so the tooling doesn't depend on the language. A bookkeeping file that grows into a wall of text has become the problem it was meant to solve.
 
 ## Code
 Code is read later, by the same brain, with less attention than it was written with. Optimise for that read.

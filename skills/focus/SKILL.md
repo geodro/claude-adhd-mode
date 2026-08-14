@@ -76,7 +76,7 @@ Refactoring the queue worker handler so it stops hanging on restart.
 ## Next
 Run `worker restart` and confirm the PID changes.
 
-## Blocked on / to decide
+## Blocked
 Nothing.
 
 ## Done
@@ -90,7 +90,15 @@ Nothing.
 - when the user leaves or the session is interrupted;
 - after any decision that would be expensive to reconstruct from memory.
 
-Keep "Done" to ~5 lines max — it's for orientation, not history. History is in git.
+**How to write it — this part gets broken most often:**
+
+- **Rewrite the whole file. Never edit it in place, never append to a section.** Editing line by line makes sections accumulate: the old entry stays, the new one lands under it, and after a few turns every section holds two half-true versions of itself in two different languages. At that point the file costs more to read than the transcript it replaced.
+- **One language throughout** — the user's. Never mix.
+- **12 lines total, "Done" at most 3.** If it doesn't fit, the older entries weren't important.
+- **Keep the section headings in English** (`## Now`, `## Next`, `## Blocked`, `## Done`) whatever language the body is in, so tooling doesn't depend on it.
+- "Done" is for orientation, not history. History is in git.
+
+Written this way the update is a few lines and reads as bookkeeping. Written badly it renders as a large diff and the user reasonably mistakes it for a change to their project.
 
 **This is enforced, not left to memory.** Three hooks in `settings.json` run `hooks/now_hook.py`:
 
