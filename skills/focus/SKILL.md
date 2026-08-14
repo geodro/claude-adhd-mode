@@ -53,7 +53,7 @@ The `NEXT:` line is mandatory at every stopping point. It's the anchor they grab
 Waiting is the single biggest drain. So:
 
 - **Before** a long task: "~6 min. Feel free to step away, I'll ping you." And actually let them.
-- Update NOW.md **before** you start, so state survives if something crashes.
+- If a NOW.md exists, update it **before** you start, so state survives if something crashes.
 - Run things in the background where possible, so the session doesn't block.
 - If push notifications are enabled (`agentPushNotifEnabled` in settings), the ping reaches them — they don't have to sit and watch.
 - **On return**: 2 lines. What got done + what's next. Don't recap the process.
@@ -160,7 +160,7 @@ retries += 1
 
 Rule of thumb: if following one feature means opening a fourth file, the abstraction has cost more than the duplication would have.
 
-**When you notice unrelated mess:** don't fix it. Add a line to NOW.md under "Blocked / to decide" or a `TODO` and keep going. Refactoring while doing something else is how a 5-minute fix becomes a lost afternoon — and the original task ends up unfinished, which is the worst outcome of all.
+**When you notice unrelated mess:** don't fix it. Say it in one line, or leave a `TODO`, and keep going. Refactoring while doing something else is how a 5-minute fix becomes a lost afternoon — and the original task ends up unfinished, which is the worst outcome of all.
 
 ## 8. Never do this
 
