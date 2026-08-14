@@ -90,6 +90,16 @@ Nothing.
 
 Keep "Done" to ~5 lines max — it's for orientation, not history. History is in git.
 
+**This is enforced, not left to memory.** Three hooks in `settings.json` run `hooks/now_hook.py`:
+
+| Hook | When | What it does |
+|---|---|---|
+| `UserPromptSubmit` | first prompt of a session | Feeds NOW.md into your context automatically. The user shouldn't have to ask "where were we". |
+| `PostToolUse` (Edit/Write) | you change a file | Flags that there's work not yet recorded. Writing NOW.md itself doesn't count. |
+| `Stop` | you finish replying | If work is unrecorded and NOW.md is older than 10 minutes, blocks the stop once and makes you update it. |
+
+So if you get told to update NOW.md before finishing: that's the hook. Update the file, don't narrate it to the user, and end with the `NEXT:` line.
+
 ## 5. The re-entry ritual
 
 When they come back after a break, or say "where were we":

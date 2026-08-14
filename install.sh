@@ -32,6 +32,15 @@ else
   echo "added    import line to $USER_MD"
 fi
 
+# 3. hooks that keep NOW.md current on their own
+if command -v python3 >/dev/null 2>&1; then
+  chmod +x "$REPO/hooks/now_hook.py"
+  REPO="$REPO" python3 "$REPO/hooks/install_hooks.py" "$CLAUDE_DIR/settings.json"
+else
+  echo "SKIPPED  hooks need python3, which isn't on PATH." >&2
+  echo "         Everything else is installed; NOW.md just won't auto-update." >&2
+fi
+
 echo
 echo "Done. Start a new Claude Code session — the rules load in every project,"
 echo "and /focus gives you the full protocol."

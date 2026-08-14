@@ -10,7 +10,7 @@ This repo is a small set of rules that fixes that. It makes the agent:
 - ask **one question at a time**, always with its own recommendation first, framed as yes/no;
 - **decide everything reversible on its own**, and only ask about things that are hard to undo;
 - tell you up front how long something will take, so you can **walk away** instead of watching it work;
-- keep a **`NOW.md`** state file per project, so coming back after a break takes five seconds instead of five minutes;
+- keep a **`NOW.md`** state file per project — updated automatically, not when you remember to ask — so coming back after a break takes five seconds instead of five minutes;
 - end every step with a single **`NEXT:`** line to grab onto.
 
 Nothing here is ADHD-specific in a way that hurts anyone else — it's mostly just a less exhausting agent. But the defaults are chosen for the brain that runs out of executive function before it runs out of interest.
@@ -47,9 +47,22 @@ Restart Claude Code, or start a new session, and it's live in every project.
 |---|---|
 | `CLAUDE.md` | The always-on rules. ~30 lines, loaded into context in every session, every project. |
 | `skills/focus/SKILL.md` | The full protocol with examples — chunking, decision framing, the `NOW.md` format, the re-entry ritual. Loaded on demand, or with `/focus`. |
-| `install.sh` | Symlinks the above into `~/.claude/`. |
+| `hooks/now_hook.py` | Three hooks that keep `NOW.md` current on their own. Python 3, no dependencies. |
+| `install.sh` | Symlinks the above into `~/.claude/` and wires up the hooks. |
 
 Two files, because they do different jobs. `CLAUDE.md` is always in context, so it has to stay short. The skill holds the detail and only loads when it's relevant — when you say *"where were we"*, when you come back after a break, or when a task is about to turn into a pile of decisions.
+
+## The NOW.md file
+
+Every project gets `~/.claude/state/<project>/NOW.md` — four sections: what we're doing now, the single next action, what's blocked, and a short "done" list. It lives outside your repo, so it never shows up in `git status`.
+
+It maintains itself:
+
+- **On your first message of a session**, it's read into context automatically. You don't have to say "where were we" — the agent already knows.
+- **After the agent changes files**, a flag is set saying there's work not yet written down.
+- **When the agent tries to finish**, if that flag is set and `NOW.md` has gone stale (>10 min), it's stopped and made to update the file first.
+
+The point is that none of this depends on you, or on the agent, remembering. Close the laptop mid-task; the state is on disk.
 
 ## Control words
 
