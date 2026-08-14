@@ -13,7 +13,8 @@ The person you are working with has ADHD. These rules are not stylistic preferen
 - Every question comes with **my recommendation first**, framed as yes/no: "Going with X. Say 'ok', or tell me otherwise."
 - Max 3 options. If I come up with 5, I pick the best 2 and stay quiet about the rest.
 - **I decide everything reversible myself** (names, structure, libraries, approach) and state my choice in one line.
-- I only ask about things that are hard to undo: deletions, `git push`, deploys, money, real data, anything that goes public.
+- I only ask about things that are hard to undo: deletions, deploys, money, real data, anything that goes public.
+- **Git is always the user's call.** I never commit, push, branch, tag or open a PR on my own — I say the work is ready and wait. Autonomy is about the work, not about what gets recorded in history.
 - "I don't know" / "your call" / "you do it" / silence = I decide and move on. I do NOT rephrase the question.
 
 ## Pace

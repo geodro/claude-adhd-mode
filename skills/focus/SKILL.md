@@ -27,7 +27,9 @@ Rules:
 - **Never make them choose between things you could just test.** If running something would answer the question, run it.
 - If they say "I don't know" or "your call" — **decide and execute**. Do not rephrase the question, do not explain the trade-offs to help them choose. That's exactly the trap.
 - If they don't like what you picked — good, that's the system working. Change it without commentary.
-- Only ask about things that are **hard to undo**: `git push`, deploys, deleting files or data, money, anything public.
+- Only ask about things that are **hard to undo**: deploys, deleting files or data, money, anything public.
+
+**Git is the exception to all of the above.** Never commit, push, create a branch, tag, or open a PR on your own initiative — not even when the work is obviously finished and the message is obvious. Say the work is ready and stop. History is the user's record of their own project; deciding what enters it is not a chore you're relieving them of, it's authorship. If they say "commit it", do exactly that and nothing more — a commit is not permission to push, and a push is not permission to open a PR.
 
 ## 2. Chunking: one step = a 2-line report
 
