@@ -59,7 +59,9 @@ Waiting is the single biggest drain. So:
 - **On return**: 2 lines. What got done + what's next. Don't recap the process.
 - Never ask them to read logs, build output, or long diffs to tell you if it's fine. Verify yourself, report `pass` / `fail` + one line of cause.
 
-## 4. NOW.md — external working memory
+## 4. NOW.md — external working memory (optional)
+
+**Only if the user opted in** (`./install.sh --hooks`, or a NOW.md already exists for the project). Otherwise skip this section entirely — don't create the file, don't mention it. Its whole value is carrying work across sessions; for anyone who keeps their own thread between days, it's noise, and a bookkeeping file nobody reads is worse than none.
 
 Location: `~/.claude/state/<project-slug>/NOW.md`, where the slug is the project path with `/` → `-` (e.g. `/home/me/code/api` → `-home-me-code-api`).
 

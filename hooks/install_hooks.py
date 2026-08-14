@@ -26,7 +26,9 @@ def entry(command, status):
 
 
 def main():
-    settings_path = sys.argv[1]
+    args = [a for a in sys.argv[1:] if a != "--remove"]
+    removing = "--remove" in sys.argv
+    settings_path = args[0]
     repo = os.environ.get("REPO") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     script = os.path.join(repo, "hooks", "now_hook.py")
 
@@ -49,15 +51,22 @@ def main():
             g for g in groups
             if not any(MARKER in (h or {}).get("command", "") for h in g.get("hooks", []))
         ]
+        if removing:
+            if not groups:
+                hooks.pop(event, None)
+            continue
         group = {"hooks": [entry(command, status)]}
         if matcher:
             group["matcher"] = matcher
         groups.append(group)
 
+    if removing and not hooks:
+        settings.pop("hooks", None)
+
     with open(settings_path, "w", encoding="utf-8") as fh:
         json.dump(settings, fh, indent=2)
         fh.write("\n")
-    print("hooks    wired into %s" % settings_path)
+    print("hooks    %s %s" % ("removed from" if removing else "wired into", settings_path))
     return 0
 
 

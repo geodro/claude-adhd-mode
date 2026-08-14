@@ -32,14 +32,22 @@ else
   echo "added    import line to $USER_MD"
 fi
 
-# 3. hooks that keep NOW.md current on their own
-if command -v python3 >/dev/null 2>&1; then
-  chmod +x "$REPO/hooks/now_hook.py"
-  REPO="$REPO" python3 "$REPO/hooks/install_hooks.py" "$CLAUDE_DIR/settings.json"
-else
-  echo "SKIPPED  hooks need python3, which isn't on PATH." >&2
-  echo "         Everything else is installed; NOW.md just won't auto-update." >&2
-fi
+# 3. NOW.md hooks — opt-in with --hooks, undone with --remove-hooks. They only
+#    earn their keep when work spans sessions; see the README.
+case "${1:-}" in
+  --hooks|--remove-hooks)
+    if command -v python3 >/dev/null 2>&1; then
+      chmod +x "$REPO/hooks/now_hook.py"
+      [ "$1" = "--remove-hooks" ] && FLAG="--remove" || FLAG=""
+      REPO="$REPO" python3 "$REPO/hooks/install_hooks.py" "$CLAUDE_DIR/settings.json" $FLAG
+    else
+      echo "SKIPPED  hooks need python3, which isn't on PATH." >&2
+    fi
+    ;;
+  *)
+    echo "skipped  NOW.md hooks — re-run with --hooks if you want them"
+    ;;
+esac
 
 echo
 echo "Done. Start a new Claude Code session — the rules load in every project,"

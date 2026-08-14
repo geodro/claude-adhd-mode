@@ -53,17 +53,15 @@ Restart Claude Code, or start a new session, and it's live in every project.
 
 Two files, because they do different jobs. `CLAUDE.md` is always in context, so it has to stay short. The skill holds the detail and only loads when it's relevant — when you say *"where were we"*, when you come back after a break, or when a task is about to turn into a pile of decisions.
 
-## The NOW.md file
+## The NOW.md file (optional)
 
-Every project gets `~/.claude/state/<project>/NOW.md` — four sections: what we're doing now, the single next action, what's blocked, and a short "done" list. It lives outside your repo, so it never shows up in `git status`.
+Off by default. Turn it on with `./install.sh --hooks`, off again with `./install.sh --remove-hooks`.
 
-It maintains itself:
+Each project gets `~/.claude/state/<project>/NOW.md` — what we're doing now, the single next action, what's blocked, a short "done" list. It lives outside your repo, so it never shows up in `git status`. And it maintains itself: it's read into context on your first message of a session, and the agent is blocked from finishing while there's work it hasn't written down.
 
-- **On your first message of a session**, it's read into context automatically. You don't have to say "where were we" — the agent already knows.
-- **After the agent changes files**, a flag is set saying there's work not yet written down.
-- **When the agent tries to finish**, if that flag is set and `NOW.md` has gone stale (>10 min), it's stopped and made to update the file first.
+**It solves exactly one problem: conversation context doesn't survive the session.** Open the same project tomorrow and the agent knows nothing about today — unless this file exists. If your work regularly spans days, that's the difference between resuming and re-explaining.
 
-The point is that none of this depends on you, or on the agent, remembering. Close the laptop mid-task; the state is on disk.
+If it doesn't — if you finish things in one sitting, or you'd rather hold the thread yourself — leave it off. A state file nobody reads is just another diff scrolling past.
 
 ## Control words
 
