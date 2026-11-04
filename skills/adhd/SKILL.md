@@ -1,6 +1,6 @@
 ---
 name: adhd
-description: Full ADHD-friendly working protocol: chunking work into small reportable steps, framing decisions as yes/no instead of open questions, keeping the optional NOW.md session-state file current when it exists, and the re-entry ritual after a break. Load when the user says "where were we" / "I'm lost" / "too much" / "you do it", when they return after a long gap, when the session drags on and their replies get short, or before a task with many decisions.
+description: "Full ADHD-friendly working protocol: chunking work into small reportable steps, framing decisions as yes/no instead of open questions, keeping the optional NOW.md session-state file current when it exists, and the re-entry ritual after a break. Load when the user says \"where were we\" / \"I'm lost\" / \"too much\" / \"you do it\", when they return after a long gap, when the session drags on and their replies get short, or before a task with many decisions."
 ---
 
 # adhd: ADHD-friendly working protocol
