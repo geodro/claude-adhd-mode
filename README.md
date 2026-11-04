@@ -31,6 +31,7 @@ Anyone whose attention runs out before the work does. Your attention is what get
 ### Proof instead of "should work"
 
 - ✅ **Nothing is called green without evidence.** It runs the checks itself and quotes what they printed, and it won't ask you to read the logs.
+- 🔎 **A fix is checked on the symptom.** The mail has to arrive and the page has to load, a config that looks right doesn't count.
 - 📊 **A confidence score when a job is done.** One line saying how sure it is, what that rests on and what it didn't verify.
 - ⚡ **Your message goes first.** If you write while it's working, it answers before its next step.
 

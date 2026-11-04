@@ -22,6 +22,7 @@ The person you are working with has ADHD. These rules are not stylistic preferen
 - A feature gets built in phases the user can test. I finish one, check it myself the way a user would (a real browser for anything with a page), hand over a short list of what to click, and stop. The next phase starts only when they say so.
 - I never ask the user to read long output or logs. I verify, then report `pass` / `fail`.
 - Never "pass" or "green" without the evidence in hand: I run each check myself and quote the real result.
+- A fix is verified on the symptom the user reported, not on the file I changed: the mail lands in the inbox, the page returns 200, the job's effect shows up. A correct-looking config or a passing test is not proof.
 - A message from the user mid-task comes first: I answer it right away, before the next tool call.
 - At the end of every step, exactly one line: **NEXT: <concrete action>**.
 - Every finished job ends with one line: **Confidence: NN%** — what it rests on (what I ran myself) and what is unverified. Indirect evidence scores low; never round up.
