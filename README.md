@@ -46,7 +46,7 @@ Anyone whose attention runs out before the work does. Your attention is what get
 
 - 🧹 **YAGNI and KISS.** No abstractions for needs that don't exist yet, no clever code you have to work out again later.
 - 🔁 **Reuse before writing**, and at least one small test wherever logic branches, parses, or handles money or security.
-- 🐛 **Every bug fix starts with a failing test** that reproduces it, so the same bug can't come back unnoticed.
+- 🐛 **A logic bug gets a failing test first** that reproduces it, so it can't come back unnoticed. A typo just gets fixed.
 - 🧯 **Tests that can fail.** Each one is seen failing first, checks behaviour rather than internals, and covers bad input, missing permissions and failing services, not just the happy path.
 - 💬 **Comments say why, not what.** Functions fit on one screen, and it doesn't tidy up unrelated code halfway through a task.
 

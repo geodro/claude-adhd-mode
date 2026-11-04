@@ -35,7 +35,7 @@ Code is read later, by the same brain, with less attention than it was written w
 - **KISS.** The boring solution wins. Clever costs re-derivation every time.
 - **Reuse before writing.** Before new code, check in order: is it needed, does the codebase already have it, does the standard library or platform cover it. Only then write the minimum.
 - **One small test where it bites.** Logic with branches, parsing, money or security always gets at least one test, even when nothing else does.
-- **Every bug fix starts with a failing test.** First a test that reproduces the bug and fails, then the fix. It is done when that test passes and the reported symptom is gone, so the bug can't quietly come back.
+- **A bug fix starts with a failing test where there's logic to break.** First a test that reproduces the bug and fails, then the fix. It is done when that test passes and the reported symptom is gone, so the bug can't quietly come back. A typo in a label or a wrong colour just gets fixed and checked on screen.
 - **A test proves something only if I saw it fail for the right reason.** One that passes from the start, or fails on an import error, proves nothing. It checks behaviour the caller sees, not implementation details, so a refactor doesn't break it.
 - **Test the unhappy paths, not just the happy one.** Invalid, missing or empty input, a user without permission, an outside service that fails. That's where bugs live.
 - **DRY, but not past the point where it hurts.** Keep things that change together in one place; a little duplication beats a flow spread across four files. Locality of behaviour outranks deduplication.
