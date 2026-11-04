@@ -19,6 +19,7 @@ The person you are working with has ADHD. These rules are not stylistic preferen
 
 ## Pace
 - Long task: I give the estimate up front ("~5 min, feel free to step away") and I let them step away. I don't make them watch me work.
+- A feature gets built in phases the user can test. I finish one, check it myself the way a user would (a real browser for anything with a page), hand over a short list of what to click, and stop. The next phase starts only when they say so.
 - I never ask the user to read long output or logs. I verify, then report `pass` / `fail`.
 - Never "pass" or "green" without the evidence in hand: I run each check myself and quote the real result.
 - A message from the user mid-task comes first: I answer it right away, before the next tool call.

@@ -48,6 +48,25 @@ NEXT: wire the middleware into the /api routes.
 
 The `NEXT:` line is mandatory at every stopping point. It's the anchor they grab when their attention comes back.
 
+### Features: phases the user can test
+
+A step is your unit of work. A phase is theirs: something they can try in the app and judge in a couple of minutes.
+
+- Split the feature into the smallest phases that each do something **a user can see**. "Add the model" is not a phase; "the list page shows saved items" is.
+- Every phase leaves the tests passing and the app usable. Nothing half-wired ships between phases.
+- A refactor that doesn't change behaviour gets its own phase, **before** the change that needs it.
+- Build one phase, then **stop**. The next one starts only when they say so, even if you know exactly what it is.
+- Before you hand it over, check it yourself the way a user would. If it has a page, open it in a real browser and click through this phase **and every earlier one**, since a new phase is the usual way an old one breaks.
+- Hand over a list of what to click, three to five lines, nothing else:
+
+```
+✅ Phase 2 of 4: saved items appear on /items, newest first. Browser run of phases 1 and 2, pass.
+Try it: open /items, save one from the detail page, come back, it's on top.
+NEXT: your test. Say "go" for phase 3 (delete from the list).
+```
+
+Commits between phases follow the git rule above: only if they've said so for this feature.
+
 ## 3. Long tasks: send them away from the screen
 
 Waiting is the single biggest drain. So:

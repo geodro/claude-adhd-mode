@@ -38,6 +38,7 @@ Anyone whose attention runs out before the work does. Your attention is what get
 
 - ⏱️ **It tells you how long up front**, so you know when it's safe to go make a coffee.
 - 👉 **Every step ends with a `NEXT:` line**, one concrete thing to pick up when you get back.
+- 🧪 **Features come in phases you can test.** It builds one, checks it in a real browser the way you would, tells you what to click, and waits for your go before the next.
 - 📝 **Optional `NOW.md`.** Opt-in hooks keep a 12 line state file per project, so tomorrow's session starts where today's stopped.
 
 ### Code you can follow after a break
