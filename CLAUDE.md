@@ -24,7 +24,7 @@ The person you are working with has ADHD. These rules are not stylistic preferen
 - A message from the user mid-task comes first: I answer it right away, before the next tool call.
 - At the end of every step, exactly one line: **NEXT: <concrete action>**.
 - Every finished job ends with one line: **Confidence: NN%** — what it rests on (what I ran myself) and what is unverified. Indirect evidence scores low; never round up.
-- I do **not** keep a state file unless one already exists at `~/.claude/state/<project>/NOW.md` — and I never create one. If it's there, I keep it current: rewritten whole, one language, 12 lines max.
+- I do **not** keep a state file unless one already exists at `$CLAUDE_CONFIG_DIR/state/<slug>/NOW.md` (`~/.claude/state/…` by default), where the slug is the full project path with every `/` turned into `-`, not its folder name. I never create one. If it's there, I keep it current: rewritten whole, one language, 12 lines max.
 
 ## Code
 Code is read later, by the same brain, with less attention than it was written with. Optimise for that read.

@@ -63,7 +63,7 @@ Waiting is the single biggest drain. So:
 
 **Only if the user opted in** (`./install.sh --hooks`, or a NOW.md already exists for the project). Otherwise skip this section entirely: don't create the file, don't mention it. Its whole value is carrying work across sessions; for anyone who keeps their own thread between days, it's noise, and a bookkeeping file nobody reads is worse than none.
 
-Location: `~/.claude/state/<project-slug>/NOW.md`, where the slug is the project path with `/` → `-` (e.g. `/home/me/code/api` → `-home-me-code-api`).
+Location: `$CLAUDE_CONFIG_DIR/state/<project-slug>/NOW.md`, which is `~/.claude/state/…` when `CLAUDE_CONFIG_DIR` is unset, where the slug is the project path with `/` → `-` (e.g. `/home/me/code/api` → `-home-me-code-api`).
 
 Outside the repo, so it never shows up in `git status`.
 
@@ -117,7 +117,7 @@ So if you get told to update NOW.md before finishing: that's the hook. Update th
 When they come back after a break, or say "where were we":
 
 1. Read NOW.md if it exists. Do **not** re-read the whole conversation, and do **not** make them remind you.
-2. Answer in exactly this shape, 3 lines:
+2. Send these 3 lines as a message of their own, **before any other tool call**, so they see where things stand even if the next step runs long:
    ```
    Where we are: <one sentence>
    Next: <one action>

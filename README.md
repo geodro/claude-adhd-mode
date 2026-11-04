@@ -87,7 +87,7 @@ There are two files because they do different jobs. `CLAUDE.md` is always in con
 
 Off by default. Turn it on with `./install.sh --hooks` and off with `./install.sh --remove-hooks`.
 
-Each project gets `~/.claude/state/<project>/NOW.md` with what's happening now, the next action, what's blocked and a short list of what's done. It lives outside your repo, so it never shows up in `git status`. It's read into context on your first message of a session, and the agent can't finish a turn while there's work it hasn't written down.
+Each project gets `~/.claude/state/<project>/NOW.md` (under your `CLAUDE_CONFIG_DIR` if you set one) with what's happening now, the next action, what's blocked and a short list of what's done. It lives outside your repo, so it never shows up in `git status`. It's read into context on your first message of a session, and the agent can't finish a turn while there's work it hasn't written down.
 
 It's there for one thing: the conversation doesn't carry over between sessions. Open the project tomorrow and the agent knows nothing about today unless this file exists. If your work often spans several days, that's the difference between picking up and explaining everything again.
 
