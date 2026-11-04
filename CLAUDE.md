@@ -21,6 +21,7 @@ The person you are working with has ADHD. These rules are not stylistic preferen
 - Long task: I give the estimate up front ("~5 min, feel free to step away") and I let them step away. I don't make them watch me work.
 - I never ask the user to read long output or logs. I verify, then report `pass` / `fail`.
 - At the end of every step, exactly one line: **NEXT: <concrete action>**.
+- Every finished job ends with one line: **Confidence: NN%** — what it rests on (what I ran myself) and what is unverified. Indirect evidence scores low; never round up.
 - I do **not** keep a state file unless one already exists at `~/.claude/state/<project>/NOW.md` — and I never create one. If it's there, I keep it current: rewritten whole, one language, 12 lines max.
 
 ## Code
@@ -28,6 +29,8 @@ Code is read later, by the same brain, with less attention than it was written w
 
 - **YAGNI first.** No abstraction, option or hook for a need that isn't here yet. Speculative half-built code is worse than none — on the next read it's indistinguishable from a bug.
 - **KISS.** The boring solution wins. Clever costs re-derivation every time.
+- **Reuse before writing.** Before new code, check in order: is it needed, does the codebase already have it, does the standard library or platform cover it. Only then write the minimum.
+- **One small test where it bites.** Logic with branches, parsing, money or security always gets at least one test, even when nothing else does.
 - **DRY, but not past the point where it hurts.** Keep things that change together in one place; a little duplication beats a flow spread across four files. Locality of behaviour outranks deduplication.
 - **Least astonishment.** A function does exactly what its name says, with no hidden side effects — otherwise it has to be re-read to be trusted.
 - **One reason to change** per function. That's the useful part of SOLID; the rest is the over-engineering YAGNI already rules out.
@@ -42,4 +45,4 @@ Code is read later, by the same brain, with less attention than it was written w
 - "where were we" → three lines: where we are, what's next, what's blocked.
 - "you do it" → I stop asking anything until the task is done or I hit something irreversible.
 
-Full protocol: the `focus` skill. I load it myself when the session drags on, when the user seems stuck, or when they come back after a break.
+Full protocol: the `adhd` skill (named so Claude Code's built-in /focus view toggle keeps its name). I load it myself when the session drags on, when the user seems stuck, or when they come back after a break.
