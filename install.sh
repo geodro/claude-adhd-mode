@@ -9,17 +9,23 @@ IMPORT_LINE="@$REPO/CLAUDE.md"
 
 mkdir -p "$CLAUDE_DIR/skills" "$CLAUDE_DIR/state"
 
-# 1. the focus skill
-SKILL_LINK="$CLAUDE_DIR/skills/focus"
+# 1. the adhd skill. Older installs linked it as "focus", which shadows
+#    Claude Code's built-in /focus, so that link is dropped.
+OLD_LINK="$CLAUDE_DIR/skills/focus"
+if [ -L "$OLD_LINK" ] && [[ "$(readlink "$OLD_LINK")" == "$REPO/skills/"* ]]; then
+  rm "$OLD_LINK"
+  echo "removed  $OLD_LINK (renamed to adhd)"
+fi
+SKILL_LINK="$CLAUDE_DIR/skills/adhd"
 if [ -L "$SKILL_LINK" ]; then
-  ln -sfn "$REPO/skills/focus" "$SKILL_LINK"
-  echo "updated  $SKILL_LINK -> $REPO/skills/focus"
+  ln -sfn "$REPO/skills/adhd" "$SKILL_LINK"
+  echo "updated  $SKILL_LINK -> $REPO/skills/adhd"
 elif [ -e "$SKILL_LINK" ]; then
   echo "SKIPPED  $SKILL_LINK already exists and is not a symlink." >&2
-  echo "         Move it aside and re-run, or point it at $REPO/skills/focus yourself." >&2
+  echo "         Move it aside and re-run, or point it at $REPO/skills/adhd yourself." >&2
 else
-  ln -s "$REPO/skills/focus" "$SKILL_LINK"
-  echo "linked   $SKILL_LINK -> $REPO/skills/focus"
+  ln -s "$REPO/skills/adhd" "$SKILL_LINK"
+  echo "linked   $SKILL_LINK -> $REPO/skills/adhd"
 fi
 
 # 2. the always-on rules, imported into your CLAUDE.md
@@ -51,4 +57,4 @@ esac
 
 echo
 echo "Done. Start a new Claude Code session — the rules load in every project,"
-echo "and /focus gives you the full protocol."
+echo "and /adhd gives you the full protocol."

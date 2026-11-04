@@ -3,7 +3,7 @@ name: adhd
 description: Full ADHD-friendly working protocol — chunking work into small reportable steps, framing decisions as yes/no instead of open questions, maintaining a NOW.md session-state file, and the re-entry ritual after a break. Load when the user says "where were we" / "I'm lost" / "too much" / "you do it", when they return after a long gap, when the session drags on and their replies get short, or before a task with many decisions.
 ---
 
-# focus — ADHD-friendly working protocol
+# adhd — ADHD-friendly working protocol
 
 The baseline rules live in `~/.claude/CLAUDE.md` and are always active. This file is the "how", with examples.
 

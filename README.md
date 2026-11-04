@@ -1,67 +1,97 @@
 # claude-adhd-mode
 
-A working style for [Claude Code](https://claude.com/claude-code), tuned for ADHD brains.
+> A working style for [Claude Code](https://claude.com/claude-code), tuned for
+> ADHD. Short answers, one question at a time, and an agent that finishes the
+> job instead of handing it back to you.
 
-Long sessions with an AI agent have a specific failure mode if you have ADHD: you get bored waiting, the agent answers with walls of text you stop reading, and then it hands you five open-ended decisions at once — right at the moment your attention is already gone.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/for-Claude%20Code-d97757)](https://claude.com/claude-code)
 
-This repo is a small set of rules that fixes that. It makes the agent:
+I wrote this because long sessions with an agent kept wearing me out. Answers I stopped reading halfway through, five decisions at once right when my attention was gone, "done" on work nobody had checked, and waits I couldn't walk away from.
+No plugin, no config format. Run `./install.sh` once and every Claude Code session, in every project, picks up the rules.
 
-- answer in **3 lines by default**, conclusion first;
-- ask **one question at a time**, always with its own recommendation first, framed as yes/no;
-- **decide everything reversible on its own**, and only ask about things that are hard to undo;
-- tell you up front how long something will take, so you can **walk away** instead of watching it work;
-- keep a **`NOW.md`** state file per project — updated automatically, not when you remember to ask — so coming back after a break takes five seconds instead of five minutes;
-- end every step with a single **`NEXT:`** line to grab onto;
-- **write code for the re-read** — YAGNI, small functions, comments that explain *why* and never *what*, and no boy-scout refactoring in the middle of another task.
+## Who it's for
 
-Nothing here is ADHD-specific in a way that hurts anyone else — it's mostly just a less exhausting agent. But the defaults are chosen for the brain that runs out of executive function before it runs out of interest.
+Anyone whose attention runs out before the work does. Your attention is what gets used up in a session, so every rule here is there to save it. Nothing in it gets in the way if you don't have ADHD, you just get an agent that's easier to work with.
 
-> **Not to be confused with** [UditAkhourii/adhd](https://github.com/UditAkhourii/adhd), which uses "ADHD" as an acronym for a parallel-divergent-ideation reasoning strategy. This repo is about the actual condition: making the agent usable when your attention is the bottleneck.
+## Features
+
+### Answers short enough to read
+
+- ✂️ **Three lines by default.** The conclusion first, no preamble, no list of options it isn't going to take. Say `details` for the long version.
+- 🎯 **One question at a time.** It gives its own pick first and asks yes or no, so you can answer without thinking it through.
+- 🗣️ **It answers in the language you wrote in.**
+
+### It decides what can be undone, and asks about the rest
+
+- 🧭 **Reversible choices are its job.** Names, structure, libraries, approach. It picks one, tells you in a line and carries on. If you say "I don't know" or say nothing, it decides instead of asking again.
+- 🛑 **Irreversible ones wait for you.** Deletions, deploys, money, real data, anything public. Git as well: it never commits, pushes or opens a PR by itself.
+- 🚦 **Control words.** `too much`, `details`, `where were we` and `you do it` change how it behaves right away.
+
+### Proof instead of "should work"
+
+- ✅ **Nothing is called green without evidence.** It runs the checks itself and quotes what they printed, and it won't ask you to read the logs.
+- 📊 **A confidence score when a job is done.** One line saying how sure it is, what that rests on and what it didn't verify.
+- ⚡ **Your message goes first.** If you write while it's working, it answers before its next step.
+
+### A pace you can walk away from
+
+- ⏱️ **It tells you how long up front**, so you know when it's safe to go make a coffee.
+- 👉 **Every step ends with a `NEXT:` line**, one concrete thing to pick up when you get back.
+- 📝 **Optional `NOW.md`.** Opt-in hooks keep a 12 line state file per project, so tomorrow's session starts where today's stopped.
+
+### Code you can follow after a break
+
+- 🧹 **YAGNI and KISS.** No abstractions for needs that don't exist yet, no clever code you have to work out again later.
+- 🔁 **Reuse before writing**, and at least one small test wherever logic branches, parses, or handles money or security.
+- 💬 **Comments say why, not what.** Functions fit on one screen, and it doesn't tidy up unrelated code halfway through a task.
+
+> **Not to be confused with** [UditAkhourii/adhd](https://github.com/UditAkhourii/adhd), which uses "ADHD" as an acronym for a reasoning strategy. This repo is about the actual condition.
 
 ## Install
 
 ```sh
-git clone https://github.com/<you>/claude-adhd-mode.git
+git clone https://github.com/geodro/claude-adhd-mode.git
 cd claude-adhd-mode
 ./install.sh
 ```
 
-The installer is non-destructive:
+The installer doesn't overwrite anything. It:
 
-- symlinks `skills/focus` into `~/.claude/skills/focus`;
-- appends one `@import` line to `~/.claude/CLAUDE.md` (creating it if missing) — your existing content is untouched;
+- symlinks `skills/adhd` into `~/.claude/skills/adhd`;
+- appends one `@import` line to `~/.claude/CLAUDE.md`, creating the file if needed and leaving what's already there alone;
 - creates `~/.claude/state/` for the `NOW.md` files.
 
-Because everything is symlinked, `git pull` updates your setup with no reinstall.
+Everything is symlinked, so a `git pull` updates you without reinstalling.
 
-Running more than one Claude config directory? Point the installer at each one:
+If you use more than one Claude config directory, run it once for each:
 
 ```sh
 CLAUDE_CONFIG_DIR=~/.claude-work ./install.sh
 ```
 
-Restart Claude Code, or start a new session, and it's live in every project.
+Start a new Claude Code session and it's active in every project.
 
 ## What's in here
 
 | File | What it does |
 |---|---|
-| `CLAUDE.md` | The always-on rules. ~30 lines, loaded into context in every session, every project. |
-| `skills/focus/SKILL.md` | The full protocol with examples — chunking, decision framing, the `NOW.md` format, the re-entry ritual. Loaded on demand, or with `/focus`. |
-| `hooks/now_hook.py` | Three hooks that keep `NOW.md` current on their own. Python 3, no dependencies. |
+| `CLAUDE.md` | The always-on rules, about 50 lines, loaded into every session in every project. |
+| `skills/adhd/SKILL.md` | The full protocol with examples: chunking, decision framing, the `NOW.md` format, the re-entry ritual. Loaded when needed, or with `/adhd`. |
+| `hooks/now_hook.py` | Three hooks that keep `NOW.md` up to date. Python 3, no dependencies. |
 | `install.sh` | Symlinks the above into `~/.claude/` and wires up the hooks. |
 
-Two files, because they do different jobs. `CLAUDE.md` is always in context, so it has to stay short. The skill holds the detail and only loads when it's relevant — when you say *"where were we"*, when you come back after a break, or when a task is about to turn into a pile of decisions.
+There are two files because they do different jobs. `CLAUDE.md` is always in context, so it has to stay short. The skill holds the detail and only loads when it's useful: when you say *"where were we"*, when you come back after a break, or when a task is about to turn into a pile of decisions.
 
 ## The NOW.md file (optional)
 
-Off by default. Turn it on with `./install.sh --hooks`, off again with `./install.sh --remove-hooks`.
+Off by default. Turn it on with `./install.sh --hooks` and off with `./install.sh --remove-hooks`.
 
-Each project gets `~/.claude/state/<project>/NOW.md` — what we're doing now, the single next action, what's blocked, a short "done" list. It lives outside your repo, so it never shows up in `git status`. And it maintains itself: it's read into context on your first message of a session, and the agent is blocked from finishing while there's work it hasn't written down.
+Each project gets `~/.claude/state/<project>/NOW.md` with what's happening now, the next action, what's blocked and a short list of what's done. It lives outside your repo, so it never shows up in `git status`. It's read into context on your first message of a session, and the agent can't finish a turn while there's work it hasn't written down.
 
-**It solves exactly one problem: conversation context doesn't survive the session.** Open the same project tomorrow and the agent knows nothing about today — unless this file exists. If your work regularly spans days, that's the difference between resuming and re-explaining.
+It's there for one thing: the conversation doesn't carry over between sessions. Open the project tomorrow and the agent knows nothing about today unless this file exists. If your work often spans several days, that's the difference between picking up and explaining everything again.
 
-If it doesn't — if you finish things in one sitting, or you'd rather hold the thread yourself — leave it off. A state file nobody reads is just another diff scrolling past.
+If you usually finish in one sitting, or you'd rather keep track yourself, leave it off.
 
 ## Control words
 
@@ -69,28 +99,28 @@ Say these at any point:
 
 | You say | It does |
 |---|---|
-| `too much` | Compresses to 2 lines immediately, no apology. |
-| `details` | Gives you the long version — only when you ask. |
-| `where were we` | Reads `NOW.md`, answers in 3 lines. |
-| `you do it` | Stops asking anything until the task is done or it hits something irreversible. |
+| `too much` | Cuts the answer to 2 lines, no apology. |
+| `details` | Gives you the long version, only when you ask. |
+| `where were we` | Reads `NOW.md` and answers in 3 lines. |
+| `you do it` | Stops asking anything until the task is done or it reaches something irreversible. |
 
 ## Making it yours
 
-Edit `CLAUDE.md`. It's 30 lines of plain English — no config format, no schema. If a rule doesn't fit how you work, delete it. If the agent does something that drains you, write the rule that stops it.
+Edit `CLAUDE.md`. It's plain English, no config format or schema. Delete any rule that doesn't fit how you work, and when the agent does something that drains you, add a rule against it.
 
-Some knobs worth considering:
+A few things worth adjusting:
 
-- **Autonomy.** The default is "decide everything reversible, announce it in one line". If you want more control, change that line to require confirmation at milestones.
+- **Autonomy.** By default it decides everything reversible and tells you in one line. If you want more control, change that line so it asks at milestones.
 - **Reply length.** 3 lines is the default. Some people want 1, some want 5.
-- **State file.** If you'd rather have `NOW.md` inside the project repo (so it's shared with teammates or committed), change the path in the skill and add it to `.gitignore` if you don't want it tracked.
+- **State file.** If you'd rather keep `NOW.md` in the project repo, to share it or commit it, change the path in the skill, and add it to `.gitignore` if it shouldn't be tracked.
 
 ## Uninstall
 
 ```sh
-rm ~/.claude/skills/focus
+rm ~/.claude/skills/adhd
 ```
 
-and delete the `@.../claude-adhd-mode/CLAUDE.md` line from `~/.claude/CLAUDE.md`.
+Then delete the `@.../claude-adhd-mode/CLAUDE.md` line from `~/.claude/CLAUDE.md`.
 
 ## License
 
