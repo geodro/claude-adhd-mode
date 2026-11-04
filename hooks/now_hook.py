@@ -42,11 +42,15 @@ def main():
     now_md = os.path.join(directory, "NOW.md")
     session = data.get("session_id") or "nosession"
 
+    # NOW.md is opt-in per project: without one there is nothing to inject,
+    # track or nag about, and the agent must never be pushed to create it.
+    if not os.path.exists(now_md):
+        return
+
     if mode == "inject":
         seen = os.path.join(directory, ".seen-" + session)
-        if not os.path.exists(now_md) or os.path.exists(seen):
+        if os.path.exists(seen):
             return
-        os.makedirs(directory, exist_ok=True)
         open(seen, "w").close()
         with open(now_md, encoding="utf-8") as fh:
             body = fh.read().strip()
@@ -68,7 +72,6 @@ def main():
         # Writing NOW.md itself is the thing that clears the debt, not new debt.
         if edited and os.path.abspath(edited) == os.path.abspath(now_md):
             return
-        os.makedirs(directory, exist_ok=True)
         open(os.path.join(directory, ".dirty-" + session), "w").close()
         return
 
@@ -76,7 +79,7 @@ def main():
         dirty = os.path.join(directory, ".dirty-" + session)
         if not os.path.exists(dirty):
             return
-        if os.path.exists(now_md) and time.time() - os.path.getmtime(now_md) < STALE_AFTER:
+        if time.time() - os.path.getmtime(now_md) < STALE_AFTER:
             return
         # Clear first: ask once per batch of work, never twice in a row.
         try:
